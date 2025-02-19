@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: #ff0000; /* Example style */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+}
+
+.back-button {
+    -fx-background-color: #0000ff; /* Special style for back button */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+}
+
+
+.label {
+    -fx-font-size: 18px;
+}
