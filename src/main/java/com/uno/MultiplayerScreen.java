@@ -14,6 +14,7 @@ public class MultiplayerScreen {
 
         Button backButton = new Button("Back");
         backButton.getStyleClass().add("back-button");
+
         backButton.setOnAction(e -> {
             try {
                 new MainMenu().start(stage);
