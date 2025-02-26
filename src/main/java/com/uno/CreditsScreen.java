@@ -13,9 +13,9 @@ public class CreditsScreen {
         Label titleLabel = new Label("Credits");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
-        Label dev1Label = new Label("Developer 1");
-        Label dev2Label = new Label("Developer 2");
-        Label dev3Label = new Label("Developer 3");
+        Label dev1Label = new Label("Developer 1: Mahta Haghbin");
+        Label dev2Label = new Label("Developer 2: Hia Al Saleh");
+        Label dev3Label = new Label("Developer 3: Yuanyang Chen");
 
         Button backButton = new Button("Back");
         backButton.getStyleClass().add("back-button");

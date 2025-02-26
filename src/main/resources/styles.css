@@ -1,17 +1,18 @@
+/* styles.css */
+
 .button {
-    -fx-background-color: #ff0000; /* Example style */
+    -fx-background-color: linear-gradient(to bottom, #ff4d4d, #b30000); 
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-padding: 10px 20px;
 }
 
 .back-button {
-    -fx-background-color: #0000ff; /* Special style for back button */
+    -fx-background-color: linear-gradient(to bottom, #4d4dff, #0000b3); 
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-padding: 10px 20px;
 }
-
 
 .label {
     -fx-font-size: 18px;
