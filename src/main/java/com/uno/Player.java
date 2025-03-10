@@ -3,7 +3,6 @@ package com.uno;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a player in the game
 public class Player {
     private String name;
     private List<Card> hand;
@@ -26,6 +25,13 @@ public class Player {
     public List<Card> getHand() {
         return hand;
     }
+
+    public void playCard(Card card) {
+        if (hand.contains(card)) {
+            hand.remove(card);
+        }
+    }
+
 
     @Override
     public String toString() {
