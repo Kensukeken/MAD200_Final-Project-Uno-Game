@@ -7,6 +7,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * @author: Hia Al Saleh
+ * @date: March 10th, 2025
+ * @Filename: LoadingScreen.java
+ *
+ * @Description: This is a loading screen represents the loading after the starter screen.
+ * */
 public class LoadingScreen {
     public void show(Stage stage) {
         stage.setTitle("Loading...");

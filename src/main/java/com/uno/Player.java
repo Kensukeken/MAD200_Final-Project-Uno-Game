@@ -3,6 +3,15 @@ package com.uno;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author: Hia Al Saleh, Yuanyang Chen
+ * @date: February 19th, 2025
+ * @Filename: Player.java
+ *
+ * @Description: The Player class is where we store all the deets about each player -
+ * their name and their current hand of cards. It's like their UNO identity card.
+ */
+
 public class Player {
     private String name;
     private List<Card> hand;

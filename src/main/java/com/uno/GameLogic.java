@@ -1,13 +1,16 @@
 package com.uno;
 
-import com.uno.Card;
-import com.uno.Deck;
-import com.uno.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author: Yuanyang Chen, Mahta Haghbin
+ * @date: March 2nd, 2025
+ * @Filename: GameLogic.java
+ *
+ * @Description: This is the main class for the game logic on the project.
+ * */
 public class GameLogic {
     private List<Player> players;
     private int currentPlayerIndex;

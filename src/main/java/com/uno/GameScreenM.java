@@ -11,6 +11,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author: Yuanyang Chen
+ * @date: March 2nd, 2025
+ * @Filename: GameScreenM.java
+ *
+ * @Description: This is a game screenM for the game logic.
+ * */
+
 public class GameScreenM extends Application {
     @Override
     public void start(Stage stage) throws Exception {

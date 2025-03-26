@@ -1,9 +1,15 @@
 package com.uno;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+/**
+ * @author: Yuanyang Chen
+ * @date: March 2nd, 2025
+ * @Filename: Deck.java
+ *
+ * @Description: This is a class represents the deck on the game logic.
+ * */
 
 // Represents a deck of UNO cards
 public class Deck {
@@ -18,7 +24,7 @@ public class Deck {
         for (String suit : suits) {
             for (String rank : ranks) {
                 cards.add(new Card(suit, rank));
-                if (!rank.equals("0")) { // Each non-zero card has two copies
+                if (!rank.equals("0")) {
                     cards.add(new Card(suit, rank));
                 }
             }

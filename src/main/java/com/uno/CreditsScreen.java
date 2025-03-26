@@ -16,6 +16,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * @author: Hia Al Saleh, Mahta Haghbin
+ * @date: March 17h, 2025
+ * @Filename: CreditsScreen.java
+ *
+ * @Description: This is a class for credits screen and has our names, and tools we used in our project.
+ * */
+
 public class CreditsScreen extends Application {
 
     @Override
@@ -63,7 +71,6 @@ public class CreditsScreen extends Application {
         Button backButton = new Button("Back");
         backButton.getStyleClass().add("back-button");
         backButton.setOnAction(e -> {
-            // Disable the button after it's clicked to prevent repeated clicks
             backButton.setDisable(true);
             try {
                 new MainMenu().start(primaryStage);
@@ -97,7 +104,7 @@ public class CreditsScreen extends Application {
         primaryStage.show();
     }
 
-    // Helper: Create a parallel rotation animation for multiple card ImageViews.
+    // Creates a parallel rotation animation for multiple card ImageViews.
     private ParallelTransition myCardRotation(ImageView card1, ImageView card2, ImageView card3, ImageView card4) {
         ParallelTransition parallelTransition = new ParallelTransition();
         for (ImageView card : new ImageView[]{card1, card2, card3, card4}) {
@@ -110,7 +117,7 @@ public class CreditsScreen extends Application {
         return parallelTransition;
     }
 
-    // Helper: Create an ImageView for a card image.
+    //  ImageView for a card image.
     private ImageView createCard(String imagePath) {
         ImageView card = new ImageView(loadImage(imagePath));
         card.setFitWidth(120);
@@ -118,7 +125,7 @@ public class CreditsScreen extends Application {
         return card;
     }
 
-    // Helper: Load an image resource with error handling.
+    // Loads an image resource with error handling.
     private Image loadImage(String imagePath) {
         try {
             return new Image(getClass().getResourceAsStream("/" + imagePath));
@@ -129,7 +136,7 @@ public class CreditsScreen extends Application {
         }
     }
 
-    // Helper: Create a Text node with a custom font and random color.
+    // Text node with a custom font and random color.
     private Text createText(String content, int size) {
         Text text = new Text(content);
         text.setFont(Font.font("Arial", FontWeight.BOLD, size));

@@ -1,4 +1,11 @@
 package com.uno;
+/**
+ * @author: Yuanyang Chen
+ * @date: March 2nd, 2025
+ * @Filename: Card.java
+ *
+ * @Description: This represents the card for the game logic.
+ * */
 
 // Represents a card in the UNO game
 public class Card {
