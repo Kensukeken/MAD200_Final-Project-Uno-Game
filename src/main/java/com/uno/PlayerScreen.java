@@ -1,6 +1,6 @@
 package com.uno;
 /*
- * @author: Hia Al Saleh, Yuanyang Chen
+ * @author: Hia Al Saleh, Yuanyang Chen, Mahta Haghbin
  * @date: February 20th to March 2nd 2025
  * Filename: PlayerScreen.java
  *
@@ -44,101 +44,189 @@ public class PlayerScreen extends Application {
         discardPileTop = gameLogic.getTopCard();
 
         root = new BorderPane();
-        root.setMinSize(700, 500);
+        root.setStyle("-fx-background-color: #2c3e50;");
 
-        // Create back button
-        backButton = new Button("Back to Menu");
-        backButton.getStyleClass().add("back-button");
+        // MAIN TOP CONTAINER - This will hold both the control buttons and player area
+        VBox mainTopContainer = new VBox();
+
+        // CONTROL PANEL - For pause and back buttons
+        HBox controlPanel = new HBox();
+        controlPanel.setStyle("-fx-padding: 5; -fx-background-color: #34495e;");
+        controlPanel.setAlignment(Pos.CENTER);
+
+        // Back Button (
+        backButton = new Button("← Menu");
+        backButton.setStyle("-fx-font-size: 12px; -fx-min-width: 70; -fx-background-color: #3498db; -fx-text-fill: white;");
         backButton.setOnAction(e -> returnToMainMenu(stage));
 
-        // Game UI components
+        // Game Info
+        HBox gameInfo = new HBox(8);
+        gameInfo.setAlignment(Pos.CENTER);
+
         turnIndicator = new Label("Turn: " + gameLogic.getCurrentPlayer().getName());
-        turnIndicator.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        turnIndicator.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white;");
 
-        lastMoveIndicator = new Label("Last Move: No moves yet.");
-        lastMoveIndicator.setStyle("-fx-font-size: 14px;");
+        lastMoveIndicator = new Label("Last: None");
+        lastMoveIndicator.setStyle("-fx-font-size: 12px; -fx-text-fill: #ecf0f1;");
 
-        debugText = new TextArea();
-        debugText.setEditable(false);
-        debugText.setPrefHeight(80);
-        debugText.setStyle("-fx-font-size: 12px;");
-        debugText.setText("Game Started\n");
+        gameInfo.getChildren().addAll(turnIndicator, lastMoveIndicator);
 
-        VBox centerBox = new VBox(5);
-        centerBox.setAlignment(Pos.CENTER);
+        // Pause Button
+        Button pauseButton = new Button("⏸ Pause");
+        pauseButton.setStyle("-fx-font-size: 12px; -fx-min-width: 70; -fx-background-color: #e74c3c; -fx-text-fill: white;");
+        pauseButton.setOnAction(e -> showPauseMenu(stage));
 
-        Text discardLabel = new Text("Discard Pile");
-        discardPileView = createImageView(discardPileTop);
+        // Layout control panel with proper spacing
+        Region leftSpacer = new Region();
+        Region rightSpacer = new Region();
+        HBox.setHgrow(leftSpacer, Priority.ALWAYS);
+        HBox.setHgrow(rightSpacer, Priority.ALWAYS);
 
-        Text drawLabel = new Text("Draw Pile");
+        controlPanel.getChildren().addAll(backButton, leftSpacer, gameInfo, rightSpacer, pauseButton);
+
+        // Added both control panel and player area to main top container
+        mainTopContainer.getChildren().addAll(controlPanel, createHorizontalPlayerArea("Player 2"));
+        root.setTop(mainTopContainer);
+
+        // CENTER AREA - Card piles
+        VBox centerArea = new VBox(10);
+        centerArea.setAlignment(Pos.CENTER);
+
+        HBox piles = new HBox(20);
+        piles.setAlignment(Pos.CENTER);
+
+        // Draw Pile
+        VBox drawPile = new VBox(3);
+        Text drawLabel = new Text("DRAW");
+        drawLabel.setStyle("-fx-font-size: 12px; -fx-fill: white;");
         drawPileView = createHiddenDrawPileImage();
+        drawPile.getChildren().addAll(drawLabel, drawPileView);
 
-        centerBox.getChildren().addAll(backButton, turnIndicator, lastMoveIndicator,
-                discardLabel, discardPileView, drawLabel, drawPileView);
-        root.setCenter(centerBox);
+        // Discard Pile
+        VBox discardPile = new VBox(3);
+        Text discardLabel = new Text("PLAY");
+        discardLabel.setStyle("-fx-font-size: 12px; -fx-fill: white;");
+        discardPileView = createImageView(discardPileTop);
+        discardPile.getChildren().addAll(discardLabel, discardPileView);
 
-        root.setTop(createHorizontalPlayerArea("Player 2"));
-        root.setBottom(new VBox(5, createHorizontalPlayerArea("You"), debugText));
-        root.setLeft(createVerticalPlayerArea("Player 1"));
+        piles.getChildren().addAll(drawPile, discardPile);
+        centerArea.getChildren().add(piles);
+        root.setCenter(centerArea);
+
+        // PLAYER AREAS
         root.setRight(createVerticalPlayerArea("Player 3"));
+        root.setLeft(createVerticalPlayerArea("Player 1"));
+        root.setBottom(createPlayerAreaWithLog());
 
-        Scene scene = new Scene(root, 1000, 500);
-        stage.setTitle("UNO Game - Single Player");
+        Scene scene = new Scene(root, 950, 750);
+        stage.setTitle("UNO Game");
         stage.setScene(scene);
         stage.show();
     }
 
-    private void returnToMainMenu(Stage currentStage) {
-        try {
-            MainMenu mainMenu = new MainMenu();
-            Stage mainMenuStage = new Stage();
-            mainMenu.start(mainMenuStage);
-            currentStage.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+    private VBox createPlayerAreaWithLog() {
+        VBox playerArea = new VBox(5);
+        playerArea.setStyle("-fx-padding: 5;");
+
+        // Your hand
+        HBox yourHand = createHorizontalPlayerArea("You");
+        yourHand.setStyle("-fx-background-color: rgba(52, 73, 94, 0.7); -fx-padding: 5;");
+
+        // Debug log
+        debugText = new TextArea();
+        debugText.setEditable(false);
+        debugText.setPrefHeight(70);
+        debugText.setStyle("-fx-font-size: 11px; -fx-control-inner-background: #2c3e50; -fx-text-fill: white;");
+
+        VBox logBox = new VBox(2, new Label("Game Log:"), debugText);
+        logBox.setStyle("-fx-padding: 3;");
+
+        playerArea.getChildren().addAll(yourHand, logBox);
+        return playerArea;
+    }
+
+    private HBox createHorizontalPlayerArea(String playerName) {
+        HBox area = new HBox(3);
+        area.setAlignment(Pos.CENTER);
+
+        Text label = new Text(playerName + " (" + gameLogic.getPlayerHand(playerName).size() + ")");
+        label.setStyle("-fx-font-size: 12px; -fx-fill: white;");
+
+        HBox cards = new HBox(2);
+        for (Card card : gameLogic.getPlayerHand(playerName)) {
+            ImageView view = createCompactCardView(card);
+            cards.getChildren().add(view);
         }
+
+        VBox container = new VBox(3, label, cards);
+        container.setAlignment(Pos.CENTER);
+        area.getChildren().add(container);
+        return area;
+    }
+
+    private VBox createVerticalPlayerArea(String playerName) {
+        VBox area = new VBox(3);
+        area.setAlignment(Pos.CENTER);
+        area.setStyle("-fx-background-color: rgba(52, 73, 94, 0.7); -fx-padding: 5;");
+
+        Text label = new Text(playerName + " (" + gameLogic.getPlayerHand(playerName).size() + ")");
+        label.setStyle("-fx-font-size: 12px; -fx-fill: white;");
+
+        VBox cards = new VBox(2);
+        for (Card card : gameLogic.getPlayerHand(playerName)) {
+            ImageView view = createCompactCardView(card);
+            cards.getChildren().add(view);
+        }
+
+        area.getChildren().addAll(label, cards);
+        return area;
     }
 
     private ImageView createImageView(Card card) {
-        ImageView imageView = new ImageView(CardLoader.loadCardImage(card.getPossibleImageNames()[0]));
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(75);
-        imageView.setPreserveRatio(true);
-        imageView.setOnMouseClicked(event -> handleCardClick(card));
-        return imageView;
+        ImageView view = new ImageView(CardLoader.loadCardImage(card.getPossibleImageNames()[0]));
+        view.setFitWidth(50);
+        view.setFitHeight(75);
+        view.setPreserveRatio(true);
+        view.setOnMouseClicked(e -> handleCardClick(card));
+        return view;
+    }
+
+    private ImageView createCompactCardView(Card card) {
+        ImageView view = new ImageView(CardLoader.loadCardImage(card.getPossibleImageNames()[0]));
+        view.setFitWidth(40);
+        view.setFitHeight(60);
+        view.setPreserveRatio(true);
+        view.setOnMouseClicked(e -> handleCardClick(card));
+        return view;
     }
 
     private ImageView createHiddenDrawPileImage() {
-        ImageView drawPileView = new ImageView(CardLoader.loadCardImage("uno_0_card.png"));
-        drawPileView.setFitWidth(50);
-        drawPileView.setFitHeight(75);
-        drawPileView.setPreserveRatio(true);
-
-        drawPileView.setOnMouseClicked(event -> {
-            Card drawnCard = gameLogic.drawFromDeck(gameLogic.getCurrentPlayer());
-            if (drawnCard != null) {
-                playerHand.add(drawnCard);
-                lastMoveIndicator.setText("You drew: " + drawnCard);
-                debugText.appendText("You drew: " + drawnCard + "\n");
-            } else {
-                lastMoveIndicator.setText("Deck is empty! No card drawn.");
-                debugText.appendText("Deck is empty! No card drawn.\n");
-            }
-            refreshUI();
-        });
-
-        return drawPileView;
+        ImageView view = new ImageView(CardLoader.loadCardImage("uno_0_card.png"));
+        view.setFitWidth(50);
+        view.setFitHeight(75);
+        view.setPreserveRatio(true);
+        view.setOnMouseClicked(e -> handleDrawCard());
+        return view;
     }
 
-    private void handleCardClick(Card clickedCard) {
-        if (gameLogic.isValidMove(clickedCard, gameLogic.getTopCard())) {
-            discardPileTop = clickedCard;
-            discardPileView.setImage(CardLoader.loadCardImage(discardPileTop.getPossibleImageNames()[0]));
-            playerHand.remove(clickedCard);
-            lastMoveIndicator.setText("You played: " + clickedCard);
-            debugText.appendText("You played: " + clickedCard + "\n");
+    private void handleDrawCard() {
+        Card drawnCard = gameLogic.drawFromDeck(gameLogic.getCurrentPlayer());
+        if (drawnCard != null) {
+            playerHand.add(drawnCard);
+            updateGameLog("You drew: " + drawnCard);
+        } else {
+            updateGameLog("Deck empty!");
+        }
+        refreshUI();
+    }
 
-            if (clickedCard.getSuit().equals("wild")) {
+    private void handleCardClick(Card card) {
+        if (gameLogic.isValidMove(card, gameLogic.getTopCard())) {
+            discardPileTop = card;
+            playerHand.remove(card);
+            updateGameLog("You played: " + card);
+
+            if (card.getSuit().equals("wild")) {
                 showColorSelection();
                 return;
             }
@@ -146,16 +234,66 @@ public class PlayerScreen extends Application {
             refreshUI();
             updateTurn();
         } else {
-            showInvalidMoveAlert();
+            showAlert("Invalid Move", "Can't play that card now!");
         }
     }
 
-    private void showInvalidMoveAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Invalid Move");
-        alert.setHeaderText(null);
-        alert.setContentText("Invalid move! Choose another card.");
-        alert.showAndWait();
+    private void showColorSelection() {
+        Stage colorStage = new Stage();
+        VBox box = new VBox(8);
+        box.setAlignment(Pos.CENTER);
+        box.setStyle("-fx-padding: 15; -fx-background-color: #34495e;");
+
+        Label label = new Label("Choose Wild Color:");
+        label.setStyle("-fx-text-fill: white;");
+
+        HBox buttons = new HBox(8);
+        buttons.setAlignment(Pos.CENTER);
+
+        String[] colors = {"Red", "Blue", "Green", "Yellow"};
+        String[] colorCodes = {"#e74c3c", "#3498db", "#2ecc71", "#f1c40f"};
+
+        for (int i = 0; i < colors.length; i++) {
+            Button btn = new Button(colors[i]);
+            btn.setStyle("-fx-font-size: 12px; -fx-background-color: " + colorCodes[i] + "; -fx-text-fill: white;");
+            final String color = colors[i].toLowerCase();
+            btn.setOnAction(e -> {
+                gameLogic.setWildCardColor(color);
+                updateGameLog("Wild: " + color);
+                colorStage.close();
+                updateTurn();
+            });
+            buttons.getChildren().add(btn);
+        }
+
+        box.getChildren().addAll(label, buttons);
+        colorStage.setScene(new Scene(box, 250, 120));
+        colorStage.show();
+    }
+
+    private void showPauseMenu(Stage mainStage) {
+        Stage pauseStage = new Stage();
+        VBox menu = new VBox(10);
+        menu.setAlignment(Pos.CENTER);
+        menu.setStyle("-fx-padding: 15; -fx-background-color: #34495e;");
+
+        Label title = new Label("GAME PAUSED");
+        title.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+
+        Button resume = new Button("Resume");
+        resume.setStyle("-fx-font-size: 12px; -fx-background-color: #2ecc71; -fx-text-fill: white;");
+        resume.setOnAction(e -> pauseStage.close());
+
+        Button mainMenu = new Button("Main Menu");
+        mainMenu.setStyle("-fx-font-size: 12px; -fx-background-color: #e74c3c; -fx-text-fill: white;");
+        mainMenu.setOnAction(e -> {
+            pauseStage.close();
+            returnToMainMenu(mainStage);
+        });
+
+        menu.getChildren().addAll(title, resume, mainMenu);
+        pauseStage.setScene(new Scene(menu, 200, 150));
+        pauseStage.show();
     }
 
     private void updateTurn() {
@@ -163,112 +301,61 @@ public class PlayerScreen extends Application {
         delay.setOnFinished(e -> {
             gameLogic.nextTurn();
             turnIndicator.setText("Turn: " + gameLogic.getCurrentPlayer().getName());
-            debugText.appendText("Turn: " + gameLogic.getCurrentPlayer().getName() + "\n");
-            refreshUI();
 
             if (!gameLogic.getCurrentPlayer().getName().equals("You")) {
                 playAI();
+            } else {
+                refreshUI();
             }
         });
         delay.play();
     }
 
     private void playAI() {
-        PauseTransition aiDelay = new PauseTransition(Duration.seconds(1));
-        aiDelay.setOnFinished(ev -> {
-            Card aiPlayedCard = gameLogic.aiPlayCard();
-            if (aiPlayedCard != null) {
-                discardPileTop = aiPlayedCard;
-                discardPileView.setImage(CardLoader.loadCardImage(aiPlayedCard.getPossibleImageNames()[0]));
-                lastMoveIndicator.setText(gameLogic.getCurrentPlayer().getName() + " played: " + aiPlayedCard);
-                debugText.appendText(gameLogic.getCurrentPlayer().getName() + " played: " + aiPlayedCard + "\n");
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(e -> {
+            Card played = gameLogic.aiPlayCard();
+            if (played != null) {
+                discardPileTop = played;
+                updateGameLog(gameLogic.getCurrentPlayer().getName() + " played: " + played);
             } else {
-                lastMoveIndicator.setText(gameLogic.getCurrentPlayer().getName() + " drew a card.");
-                debugText.appendText(gameLogic.getCurrentPlayer().getName() + " drew a card.\n");
+                updateGameLog(gameLogic.getCurrentPlayer().getName() + " drew card");
             }
             refreshUI();
             updateTurn();
         });
-        aiDelay.play();
+        delay.play();
     }
 
     private void refreshUI() {
-        root.setTop(createHorizontalPlayerArea("Player 2"));
-        root.setBottom(new VBox(5, createHorizontalPlayerArea("You"), debugText));
-        root.setLeft(createVerticalPlayerArea("Player 1"));
-        root.setRight(createVerticalPlayerArea("Player 3"));
-
         discardPileView.setImage(CardLoader.loadCardImage(discardPileTop.getPossibleImageNames()[0]));
-        drawPileView.setImage(CardLoader.loadCardImage("uno_0_card.png"));
+        root.setRight(createVerticalPlayerArea("Player 3"));
+        root.setLeft(createVerticalPlayerArea("Player 1"));
+        root.setBottom(createPlayerAreaWithLog());
+        root.setTop(createHorizontalPlayerArea("Player 2"));
+    }
 
+    private void updateGameLog(String message) {
+        lastMoveIndicator.setText("Last: " + message.split("\n")[0]);
+        debugText.appendText(message + "\n");
         debugText.setScrollTop(Double.MAX_VALUE);
     }
 
-    private HBox createHorizontalPlayerArea(String playerName) {
-        HBox playerBox = new HBox(3);
-        playerBox.setAlignment(Pos.CENTER);
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
-        Text playerLabel = new Text(playerName + " (" + gameLogic.getPlayerHand(playerName).size() + " cards)");
-
-        HBox cardBox = new HBox(2);
-        for (Card card : gameLogic.getPlayerHand(playerName)) {
-            cardBox.getChildren().add(createImageView(card));
+    private void returnToMainMenu(Stage currentStage) {
+        try {
+            currentStage.close();
+            new MainMenu().start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        VBox container = new VBox(2, playerLabel, cardBox);
-        container.setAlignment(Pos.CENTER);
-        playerBox.getChildren().add(container);
-        return playerBox;
-    }
-
-    private void showColorSelection() {
-        Stage colorStage = new Stage();
-        colorStage.setTitle("Choose a Color");
-
-        VBox colorBox = new VBox(10);
-        colorBox.setAlignment(Pos.CENTER);
-
-        Label label = new Label("Select a color for the Wild card:");
-
-        Button redBtn = new Button("Red");
-        Button blueBtn = new Button("Blue");
-        Button greenBtn = new Button("Green");
-        Button yellowBtn = new Button("Yellow");
-
-        redBtn.setOnAction(e -> selectWildColor("red", colorStage));
-        blueBtn.setOnAction(e -> selectWildColor("blue", colorStage));
-        greenBtn.setOnAction(e -> selectWildColor("green", colorStage));
-        yellowBtn.setOnAction(e -> selectWildColor("yellow", colorStage));
-
-        colorBox.getChildren().addAll(label, redBtn, blueBtn, greenBtn, yellowBtn);
-
-        Scene scene = new Scene(colorBox, 200, 150);
-        colorStage.setScene(scene);
-        colorStage.show();
-    }
-
-    private void selectWildColor(String color, Stage stage) {
-        gameLogic.setWildCardColor(color);
-        debugText.appendText("Wild card set to: " + color + "\n");
-        lastMoveIndicator.setText("You chose color: " + color);
-        stage.close();
-        updateTurn();
-    }
-
-
-    private VBox createVerticalPlayerArea(String playerName) {
-        VBox playerBox = new VBox(2);
-        playerBox.setAlignment(Pos.CENTER);
-
-        Text playerLabel = new Text(playerName + " (" + gameLogic.getPlayerHand(playerName).size() + " cards)");
-
-        VBox cardBox = new VBox(2);
-        for (Card card : gameLogic.getPlayerHand(playerName)) {
-            cardBox.getChildren().add(createImageView(card));
-        }
-
-        playerBox.getChildren().addAll(playerLabel, cardBox);
-        return playerBox;
     }
 
     public static void main(String[] args) {

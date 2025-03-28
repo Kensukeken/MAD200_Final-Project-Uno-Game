@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 /**
- * @author: Hia Al Saleh
+ * @author: Hia Al Saleh, Mahta Haghbin
  * @date: March 24th, 2025
  * @Filename: PauseScreen.java
  *
@@ -34,6 +34,31 @@ public class PauseScreen {
                 ex.printStackTrace();
             }
         });
+
+        // Created settings button
+        Button settingsButton = new Button("Settings");
+        settingsButton.getStyleClass().add("settings-button");
+        settingsButton.setOnAction(e -> {
+            // Logic to open settings screen
+            Settings settingsScreen = new Settings();
+            settingsScreen.start(stage);
+        });
+        // Created rules button
+        Button rulesButton = new Button("Rules");
+        rulesButton.getStyleClass().add("rules-button");
+        rulesButton.setOnAction(e -> {
+            // Logic to open rules screen
+            UnoRules rulesScreen = new UnoRules();
+            rulesScreen.start(stage);
+        });
+        // Created quit button
+        Button quitButton = new Button("Quit");
+        quitButton.getStyleClass().add("quit-button");
+        quitButton.setOnAction(e -> {
+            // Logic to quit the game
+            stage.close(); // Close the stage to quit the game
+        });
+
 
         VBox layout = new VBox(20, label, resumeButton, backButton);
         layout.setAlignment(Pos.CENTER);

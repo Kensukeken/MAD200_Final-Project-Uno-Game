@@ -23,7 +23,7 @@ public class GameScreenM extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         BorderPane root = new BorderPane();
-        root.setMinSize(700, 400);
+        root.setMinSize(1000, 800);
 
         VBox centerBox = new VBox(10);
         centerBox.setAlignment(Pos.CENTER);
@@ -49,7 +49,7 @@ public class GameScreenM extends Application {
         VBox rightPlayer = vPlayerArea("Player 3");
         root.setRight(rightPlayer);
 
-        Scene scene = new Scene(root, 700, 400);
+        Scene scene = new Scene(root, 1200, 1000);
         stage.setTitle("UNO Game");
         stage.setScene(scene);
         stage.show();
