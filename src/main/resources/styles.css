@@ -1,5 +1,4 @@
 /* styles.css */
-
 .button {
     -fx-background-color: linear-gradient(to bottom, #ff4d4d, #b30000); 
     -fx-text-fill: #ffffff;
@@ -32,4 +31,24 @@
 
 .image-view {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+/* Main Menu Styles */
+.button {
+    -fx-background-color: linear-gradient(to bottom right, rgba(255, 0, 38, 0.35), #b64128);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #E74C3C;
+}
+
+.root {
+    -fx-background-color: linear-gradient(to bottom right, rgba(255, 53, 71, 0.8), rgba(250, 197, 197, 0.8));
 }

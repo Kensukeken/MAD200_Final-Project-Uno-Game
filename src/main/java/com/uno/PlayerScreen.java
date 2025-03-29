@@ -1,11 +1,4 @@
 package com.uno;
-/*
- * @author: Hia Al Saleh, Yuanyang Chen, Mahta Haghbin
- * @date: February 20th to March 2nd 2025
- * Filename: PlayerScreen.java
- *
- * Description: This class represents the game logic with single player
- * */
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -18,7 +11,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.List;
-
+/**
+ * @author: Hia Al Saleh, Yuanyang Chen, Mahta Haghbin
+ * @date: February 20th to March 2nd 2025
+ * @Filename: PlayerScreen.java
+ *
+ * @Description: This class represents the game logic with single player
+ * */
 public class PlayerScreen extends Application {
     private List<Card> playerHand;
     private Card discardPileTop;
@@ -46,15 +45,15 @@ public class PlayerScreen extends Application {
         root = new BorderPane();
         root.setStyle("-fx-background-color: #2c3e50;");
 
-        // MAIN TOP CONTAINER - This will hold both the control buttons and player area
+        // Main Top Container - This will hold both the control buttons and player area
         VBox mainTopContainer = new VBox();
 
-        // CONTROL PANEL - For pause and back buttons
+        // Control Panel - For pause and back buttons
         HBox controlPanel = new HBox();
         controlPanel.setStyle("-fx-padding: 5; -fx-background-color: #34495e;");
         controlPanel.setAlignment(Pos.CENTER);
 
-        // Back Button (
+        // Back Button
         backButton = new Button("← Menu");
         backButton.setStyle("-fx-font-size: 12px; -fx-min-width: 70; -fx-background-color: #3498db; -fx-text-fill: white;");
         backButton.setOnAction(e -> returnToMainMenu(stage));
@@ -84,14 +83,14 @@ public class PlayerScreen extends Application {
 
         controlPanel.getChildren().addAll(backButton, leftSpacer, gameInfo, rightSpacer, pauseButton);
 
-        // Added both control panel and player area to main top container
         mainTopContainer.getChildren().addAll(controlPanel, createHorizontalPlayerArea("Player 2"));
         root.setTop(mainTopContainer);
 
-        // CENTER AREA - Card piles
+        //  Center Area - Card piles
         VBox centerArea = new VBox(10);
         centerArea.setAlignment(Pos.CENTER);
 
+        // Piles
         HBox piles = new HBox(20);
         piles.setAlignment(Pos.CENTER);
 
@@ -113,7 +112,7 @@ public class PlayerScreen extends Application {
         centerArea.getChildren().add(piles);
         root.setCenter(centerArea);
 
-        // PLAYER AREAS
+        // Players area
         root.setRight(createVerticalPlayerArea("Player 3"));
         root.setLeft(createVerticalPlayerArea("Player 1"));
         root.setBottom(createPlayerAreaWithLog());
