@@ -208,6 +208,6 @@ The **Uno Rules screen** is a guide on how to play the uno game.
 
 |**Developer**| **Name** | **Contribution**                                                                                                                                      |  
 |----------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------|  
-| **Developer 1** | Yuanyang Chen | `Game logic`, `GameScreenM`, `TestCardLoader`, `CardLoader`, `Deck`, and all files under `Additional_GameLogic_Files`.                                
-| **Developer 2** | Hia Al Saleh | `Card`, `CreditsScreen`, `Deck`, `GameLauncher`, `GameScreenM`, `LoadingScreen`, `MainMenu`, `Player`, `PlayerScreen`, `StartScreen`, and `UnoRules`. 
+| **Developer 1** | Yuanyang Chen | `Game logic`, `GameScreenM`, `PlayerScreen`, `TestCardLoader`, `CardLoader`, `Deck`, and all files under `Additional_GameLogic_Files`.                                
+| **Developer 2** | Hia Al Saleh | `Card`, `CreditsScreen`, `Deck`, `GameLauncher`, `GameScreenM`, `LoadingScreen`, `MainMenu`, `Player`, `PlayerScreen`, `StartScreen`, `Settings`and `UnoRules`. 
 | **Developer 3** | Mahta Haghbin | `CreditsScreen`, `MainMenu`, `GameLogic`, `Music`, `Settings`, and `PlayerScreen`.                                                                    
