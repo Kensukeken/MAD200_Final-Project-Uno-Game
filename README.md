@@ -25,80 +25,81 @@ Welcome to **UNO Game** – a fun card game made with JavaFX. This was a group p
 ## Project Structure
 
 ### **Planned Structure:**
-```yaml
-src
-    main
-        java
-            com.uno
-                game
-                    Card.java
-                    CardColor.java
-                    CardLoader.java
-                    CardType.java
-                    Deck.java
-                    GameDirection.java
-                    GameEventPublisher.java
-                    GameSession.java
-                    PileManager.java
-                    Player.java
-                    PlayerCardList.java
-                    PlayerStateManager.java
-                    UnoCardDeck.java
-                ui
-                    SinglePlayerScreen.java
-                    MainMenu.java
-                    StartScreen.java
-                    LoadingScreen.java
-                    PlayerScreen.java
-                    Settings.java
-                    CreditsScreen.java
-                    GameScreenM.java
-                core
-                    GameLauncher.java
-                    GameLogic.java
-                    UnoRules.java
-                util
-                    Music.java
-                    TestCardLoader.java
+```
+src/
+└── main/
+└── java/
+└── com.uno/
+├── game/
+│   ├── Card.java
+│   ├── CardColor.java
+│   ├── CardLoader.java
+│   ├── CardType.java
+│   ├── Deck.java
+│   ├── GameDirection.java
+│   ├── GameEventPublisher.java
+│   ├── GameSession.java
+│   ├── PileManager.java
+│   ├── Player.java
+│   ├── PlayerCardList.java
+│   ├── PlayerStateManager.java
+│   └── UnoCardDeck.java
+├── ui/
+│   ├── SinglePlayerScreen.java
+│   ├── MainMenu.java
+│   ├── StartScreen.java
+│   ├── LoadingScreen.java
+│   ├── PlayerScreen.java
+│   ├── Settings.java
+│   ├── CreditsScreen.java
+│   └── GameScreenM.java
+├── core/
+│   ├── GameLauncher.java
+│   ├── GameLogic.java
+│   └── UnoRules.java
+└── util/
+├── Music.java
+└── TestCardLoader.java
 ```
 
 ### **Final Implemented Structure:**
 ```
-src
-    main
-        java
-            com.uno
-                Additional_GameLogic_Files
-                    Card.java
-                    CardColor.java
-                    CardLoader.java
-                    CardType.java
-                    GameDirection.java
-                    GameEventPublisher.java
-                    GameLaunch.java
-                    GameSession.java
-                    PileManager.java
-                    Player.java
-                    PlayerCardList.java
-                    PlayerStateManager.java
-                    SinglePlayerScreen.java
-                    UnoCardDeck.java
-            Card.java
-            CardLoader.java
-            CreditsScreen.java
-            Deck.java
-            GameLauncher.java
-            GameLogic.java
-            GameScreenM.java
-            LoadingScreen.java
-            MainMenu.java
-            Music.java
-            Player.java
-            PlayerScreen.java
-            Settings.java
-            StartScreen.java
-            TestCardLoader.java
-            UnoRules.java
+src/
+└── main/
+    └── java/
+        ├── com.uno/
+        │   └── Additional_GameLogic_Files/
+        │       ├── Card.java
+        │       ├── CardColor.java
+        │       ├── CardLoader.java
+        │       ├── CardType.java
+        │       ├── GameDirection.java
+        │       ├── GameEventPublisher.java
+        │       ├── GameLaunch.java
+        │       ├── GameSession.java
+        │       ├── PileManager.java
+        │       ├── Player.java
+        │       ├── PlayerCardList.java
+        │       ├── PlayerStateManager.java
+        │       ├── SinglePlayerScreen.java
+        │       └── UnoCardDeck.java
+        └── (root files)/
+            ├── Card.java
+            ├── CardLoader.java
+            ├── CreditsScreen.java
+            ├── Deck.java
+            ├── GameLauncher.java
+            ├── GameLogic.java
+            ├── GameScreenM.java
+            ├── LoadingScreen.java
+            ├── MainMenu.java
+            ├── Music.java
+            ├── Player.java
+            ├── PlayerScreen.java
+            ├── Settings.java
+            ├── StartScreen.java
+            ├── TestCardLoader.java
+            └── UnoRules.java
 ```
 
 ---
@@ -131,7 +132,7 @@ src
 ### Steps
 1. Clone this repository:
    ```bash
-   git clone https://github.com/Kensukeken/MAD200_Final-Project-Uno-Game.git
+   git clone "https://github.com/Kensukeken/MAD200_Final-Project-Uno-Game.git"
    ```  
 2. Open the project in your IDE.
 3. Set up **JavaFX libraries** if necessary.
