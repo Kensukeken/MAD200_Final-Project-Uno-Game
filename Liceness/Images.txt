@@ -1,3 +1,9 @@
+* @author: Hia Al Saleh
+* @date: February 18th, 2025
+* @Filename: Images.txt
+*
+* @Description: This is license for all images that we use in this project.
+
 Image Sources & Licenses:
 - UNO Card Images: [Creazilla - UNO Cards](https://creazilla.com/search/clipart/uno%20card) (Free for personal and commercial use, check Creazilla’s license terms)
 - Background Image: [Mattel UNO Game Show Announcement](https://www.licenseglobal.com/toys-games/mattel-reveals-uno-game-show-plans) (Rights may be owned by Mattel, refer to source for usage details)

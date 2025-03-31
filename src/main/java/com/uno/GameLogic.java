@@ -64,6 +64,7 @@ public class GameLogic {
         return deck.isEmpty() ? null : deck.drawCard();
     }
 
+    // Need to work on this
     public boolean isValidMove(Card playedCard, Card topCard) {
         if (playedCard == null || topCard == null) {
             return false;
@@ -117,7 +118,7 @@ public class GameLogic {
                 }
 
                 if (card.getRank().equals("Draw Two")) {
-                    forceNextPlayerDraw(2);
+                    forceNextPlayerDraw(1);
                 } else {
                     nextTurn();
                 }

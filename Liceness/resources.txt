@@ -1,3 +1,9 @@
+* @author: Hia Al Saleh
+* @date: March 3rd, 2025
+* @Filename: resources.txt
+*
+* @Description: This is license for all resources that we use in this project.
+
  Resources:
 - JavaFX Loading Screen Tutorial: [Coder Scratchpad](https://coderscratchpad.com/javafx-progressbar/) - Created a loading screen for my application
 - JavaFX Scroll Pane: [Oracle Docs](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ScrollPane.html) - Created a scroll pane for my UNO rules screen
@@ -7,4 +13,3 @@
  Animation Library:
 - JavaFX Animation Library Documentation: [Oracle Docs](https://docs.oracle.com/javase/8/javafx/api/javafx/animation/package-summary.html)
 - JavaFX Animations Guide: [Dev.java](https://dev.java/learn/javafx-animations/) - Learn how to create animations in JavaFX
-
