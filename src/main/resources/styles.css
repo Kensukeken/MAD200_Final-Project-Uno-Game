@@ -1,4 +1,10 @@
-/* styles.css */
+/*
+@author: Hia Al Saleh
+@date: February 27th, 2025
+@filename: styles.css
+*/
+
+/* General button styling */
 .button {
     -fx-background-color: linear-gradient(to bottom, #ff4d4d, #b30000); 
     -fx-text-fill: #ffffff;
@@ -6,16 +12,23 @@
     -fx-padding: 10px 20px;
 }
 
+/* Styling for the back button */
 .back-button {
     -fx-background-color: linear-gradient(to bottom, #4d4dff, #0000b3);
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-padding: 10px 20px;
+    -fx-font-size: 18px;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5;
 }
 
+/* General label styling */
 .label {
     -fx-font-size: 18px;
 }
+
+/* Special styling for title labels */
 .title-label {
     -fx-text-fill: red;
     -fx-font-size: 28px;
@@ -23,12 +36,7 @@
     -fx-padding: 0 0 10 0;
 }
 
-.back-button {
-    -fx-font-size: 18px;
-    -fx-padding: 8 20;
-    -fx-background-radius: 5;
-}
-
+/* Styling for images */
 .image-view {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
 }
@@ -45,10 +53,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
 }
 
+/* Button hover effect */
 .button:hover {
     -fx-background-color: #E74C3C;
 }
 
+/* Root container styling */
 .root {
     -fx-background-color: linear-gradient(to bottom right, rgba(255, 53, 71, 0.8), rgba(250, 197, 197, 0.8));
 }

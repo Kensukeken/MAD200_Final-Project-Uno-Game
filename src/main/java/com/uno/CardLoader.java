@@ -1,6 +1,5 @@
 package com.uno;
 
-import java.io.File;
 import javafx.scene.image.Image;
 /**
  * @author: Yuanyang Chen

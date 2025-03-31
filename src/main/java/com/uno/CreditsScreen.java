@@ -16,14 +16,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- * @author: Hia Al Saleh, Mahta Haghbin
- * @date: March 17h, 2025
- * @Filename: CreditsScreen.java
- *
- * @Description: This is a class for credits screen and has our names, and tools we used in our project.
- * */
-
 public class CreditsScreen extends Application {
 
     @Override
@@ -31,7 +23,6 @@ public class CreditsScreen extends Application {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 700, 400, Color.BLACK);
 
-        // Background image setup
         ImageView background = new ImageView(loadImage("background.png"));
         background.setFitWidth(700);
         background.setFitHeight(400);
@@ -41,12 +32,12 @@ public class CreditsScreen extends Application {
         background.setEffect(colorAdjust);
         StackPane backgroundPane = new StackPane(background);
         root.setCenter(backgroundPane);
+        root.setStyle("-fx-background-color: red;");
 
-        // Credits content (cards and text) inside a VBox
+
         VBox creditsBox = new VBox(20);
         creditsBox.setAlignment(Pos.CENTER);
 
-        // Card images and their container
         HBox cardBox = new HBox(20);
         cardBox.setAlignment(Pos.CENTER);
         ImageView card1 = createCard("red_card.png");
@@ -55,21 +46,24 @@ public class CreditsScreen extends Application {
         ImageView card4 = createCard("yellow_card.png");
         cardBox.getChildren().addAll(card1, card2, card3, card4);
 
-        // Credits text
         Text projectText = createText("Uno Game Project", 24);
         Text contributorsText = createText("Contributors: Hia Al Saleh, Mahta Haghbin, Yuanyang Chen", 18);
         Text resourcesText = createText("Resources: SceneBuilder, JavaFX Loading Screen, JavaFX Animation Library", 18);
         Text assetsText = createText("Image Assets: Creazilla UNO Cards, Mattel UNO Game Show Plans", 18);
-        VBox textBox = new VBox(10,  projectText, contributorsText, resourcesText, assetsText);
+        VBox textBox = new VBox(10, projectText, contributorsText, resourcesText, assetsText);
         textBox.setAlignment(Pos.CENTER);
         textBox.setOpacity(0);
 
         creditsBox.getChildren().addAll(cardBox, textBox);
         backgroundPane.getChildren().add(creditsBox);
 
-        // Back Button placed at the top-left corner
         Button backButton = new Button("Back");
-        backButton.getStyleClass().add("back-button");
+        backButton.setStyle("-fx-background-color: #FF4444;");
+
+        backButton.setOnMouseEntered(e -> backButton.setStyle("-fx-background-color: #CC0000;" + "-fx-text-fill: white;"));
+
+        backButton.setOnMouseExited(e -> backButton.setStyle("-fx-background-color: #FF4444;" + "-fx-text-fill: white;" + "-fx-border-color: #AA0000;"));
+
         backButton.setOnAction(e -> {
             backButton.setDisable(true);
             try {
@@ -79,12 +73,12 @@ public class CreditsScreen extends Application {
             }
         });
 
-        // HBox for the back button positioned at the top-left
+        // Back button container
         HBox backButtonContainer = new HBox(backButton);
         backButtonContainer.setAlignment(Pos.TOP_LEFT);
-        root.setTop(backButtonContainer);  // Set back button at the top-left corner
+        root.setTop(backButtonContainer);
 
-        // Animation Sequence (without the final fade-out)
+        // Animations for the cards
         ParallelTransition cardRotateAnimation = myCardRotation(card1, card2, card3, card4);
         FadeTransition textFadeInAnimation = new FadeTransition(Duration.seconds(2), textBox);
         textFadeInAnimation.setFromValue(0);
@@ -104,7 +98,7 @@ public class CreditsScreen extends Application {
         primaryStage.show();
     }
 
-    // Creates a parallel rotation animation for multiple card ImageViews.
+    // Animations for the cards using ParallelTransition
     private ParallelTransition myCardRotation(ImageView card1, ImageView card2, ImageView card3, ImageView card4) {
         ParallelTransition parallelTransition = new ParallelTransition();
         for (ImageView card : new ImageView[]{card1, card2, card3, card4}) {
@@ -117,7 +111,7 @@ public class CreditsScreen extends Application {
         return parallelTransition;
     }
 
-    //  ImageView for a card image.
+    // Method to create the image path
     private ImageView createCard(String imagePath) {
         ImageView card = new ImageView(loadImage(imagePath));
         card.setFitWidth(120);
@@ -125,7 +119,7 @@ public class CreditsScreen extends Application {
         return card;
     }
 
-    // Loads an image resource with error handling.
+    // Method to load the image from resources folder
     private Image loadImage(String imagePath) {
         try {
             return new Image(getClass().getResourceAsStream("/" + imagePath));
@@ -136,7 +130,7 @@ public class CreditsScreen extends Application {
         }
     }
 
-    // Text node with a custom font and random color.
+    // Method to create the text
     private Text createText(String content, int size) {
         Text text = new Text(content);
         text.setFont(Font.font("Arial", FontWeight.BOLD, size));
@@ -144,7 +138,7 @@ public class CreditsScreen extends Application {
         return text;
     }
 
-    // Main Method
+    // Main method
     public static void main(String[] args) {
         launch(args);
     }

@@ -93,5 +93,3 @@ public class GameScreenM extends Application {
         launch(args);
     }
 }
-
-

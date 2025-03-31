@@ -37,7 +37,7 @@ public class LoadingScreen {
         delay.play();
     }
 
-    // Show the main menu after the loading screen
+    // Shows the main menu after the loading screen
     private void showMainMenu(Stage stage) {
         MainMenu mainMenu = new MainMenu();
         try {

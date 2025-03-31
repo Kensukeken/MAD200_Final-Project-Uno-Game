@@ -53,8 +53,6 @@ public class Card {
         };
     }
 
-
-
     @Override
     public String toString() {
         if (suit.equalsIgnoreCase("wild")) {

@@ -21,19 +21,17 @@ import javafx.util.Duration;
  * @date: March 17th, 2025
  * @Filename: StartScreen.java
  *
- * @Description: This is where the magic begins - our welcome screen with 
- * sick animations that make the UNO card dance and the text fade in smooth. 
- * It's like the opening scene of a blockbuster movie but for our UNO game.
+ * @Description: This is class represents our welcome screen with.
  */
 public class StartScreen extends Application {
     @Override
     public void start(Stage stage) {
-        // Setting up the main stage - our VIP lounge for UNO
+        // Setting up the main stage
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 700, 400);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
-        // Big flashy title because subtlety is overrated
+        // Text title for welcoming screen
         Text titleText = new Text("Welcome to UNO Game");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         titleText.setFill(Color.RED); 
@@ -44,20 +42,21 @@ public class StartScreen extends Application {
         unoCard.setFitWidth(120);
         unoCard.setFitHeight(120);
 
-        // Positioning everything center stage like a diva
+        // Setting the title text on top of the screen
         VBox topBox = new VBox(10, titleText);
         topBox.setAlignment(Pos.CENTER);
         root.setTop(topBox);
 
+        // Centers the uno card
         VBox centerBox = new VBox(unoCard);
         centerBox.setAlignment(Pos.CENTER);
         root.setCenter(centerBox);
 
-        // The big shiny button that starts the adventure
+        // The button that starts the game "Click here to get started!"
         Button startButton = new Button("Click here to get started!");
         startButton.getStyleClass().add("button");
 
-        // What happens when you can't resist clicking the button
+        // What happens when you can't keep out clicking the button
         startButton.setOnAction(event -> {
             try {
                 // First we show the loading screen to build anticipation
@@ -68,11 +67,11 @@ public class StartScreen extends Application {
                 PauseTransition delay = new PauseTransition(Duration.seconds(5));
                 delay.setOnFinished(e -> {
                     try {
-                        // Finally revealing the main menu like a boss
+                        // Finally revealing the main menu
                         MainMenu menu = new MainMenu();
                         menu.start(stage);
                     } catch (Exception ex) {
-                        ex.printStackTrace();  // Just in case things go sideways
+                        ex.printStackTrace();
                     }
                 });
                 delay.play();
@@ -94,10 +93,7 @@ public class StartScreen extends Application {
         stage.show();
     }
 
-    /**
-     * Makes the UNO card do a whole dance routine - fade, grow, slide, and spin
-     * @param card The lucky card that gets to show off
-     */
+    // Makes the UNO card do a whole dance routine - fade, grow, slide, and spin
     private void animateCard(ImageView card) {
         // Fade in like a ghost appearing
         FadeTransition fade = new FadeTransition(Duration.seconds(1.5), card);
@@ -121,7 +117,7 @@ public class StartScreen extends Application {
         rotate.setFromAngle(0);
         rotate.setToAngle(360);
 
-        // Choreographing all these moves into one smooth performance
+        // Look after all these moves into one smooth performance
         SequentialTransition sequence = new SequentialTransition(fade, scale, move, rotate);
         sequence.setCycleCount(1);  // One-time show
         sequence.setOnFinished(event -> card.setOpacity(1));  // Making sure it stays visible
@@ -129,18 +125,19 @@ public class StartScreen extends Application {
     }
 
     /**
-     * Makes the text fade in all smooth and classy
-     * @param text The text that's about to make an entrance
-     * @return The fade transition because we might want to reuse it
+     * Smoothly fades in the text.
+     * @param text The text to show.
+     * @return The fade effect for reuse.
      */
+
     private FadeTransition animateText(Text text) {
         FadeTransition fade = new FadeTransition(Duration.seconds(3), text);
-        fade.setFromValue(0);  // Starting invisible
-        fade.setToValue(1);    // Ending fully visible
+        fade.setFromValue(0);
+        fade.setToValue(1);
         return fade;
     }
 
-    // The classic main method - the ignition to start our engine
+    // Main method
     public static void main(String[] args) {
         launch();
     }

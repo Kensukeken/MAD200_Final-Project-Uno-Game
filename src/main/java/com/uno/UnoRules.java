@@ -15,27 +15,25 @@ import javafx.geometry.Insets;
  * @date: March 24th, 2025
  * @Filename: UnoRules.java
 
- * @Description: Shows the UNO game rules as an image - because who wants to read
- * a wall of text when you can just look at a picture, right?
+ * @Description: Shows the UNO game rules as an image with scrollPane
  */
 public class UnoRules {
     public void start(Stage stage) {
-        // Making the title look fancy
         Label label = new Label("How To Play");
         label.getStyleClass().add("title-label");
 
-        // Loading the UNO rules image - the real MVP of this screen
+        // Loading the UNO rules image
         Image rulesImage = new Image(getClass().getResourceAsStream("/uno_rules.png"));
         ImageView imageView = new ImageView(rulesImage);
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(600);
 
-        // Centering the image because symmetry is satisfying
+        // Centering the image
         StackPane centeredImage = new StackPane(imageView);
         centeredImage.setAlignment(Pos.CENTER);
         centeredImage.setPadding(new Insets(10));
 
-        // Setting up scroll in case someone's on a tiny screen
+        // Setting up scrollPane in case someone's on a tiny screen (assume I have Windows 10 if that makes sense)
         ScrollPane scrollPane = new ScrollPane(centeredImage);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -44,7 +42,7 @@ public class UnoRules {
         scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
         VBox.setVgrow(scrollPane, Priority.ALWAYS);
 
-        // The trusty back button - our escape route to the main menu
+        // Back button
         Button backButton = new Button("Back");
         backButton.getStyleClass().add("back-button");
         backButton.setOnAction(e -> {

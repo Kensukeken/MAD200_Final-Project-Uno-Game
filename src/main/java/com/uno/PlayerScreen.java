@@ -123,6 +123,7 @@ public class PlayerScreen extends Application {
         stage.show();
     }
 
+    // Method to create player area with log
     private VBox createPlayerAreaWithLog() {
         VBox playerArea = new VBox(5);
         playerArea.setStyle("-fx-padding: 5;");
@@ -144,6 +145,7 @@ public class PlayerScreen extends Application {
         return playerArea;
     }
 
+    // Method to create horizontal player area around the game
     private HBox createHorizontalPlayerArea(String playerName) {
         HBox area = new HBox(3);
         area.setAlignment(Pos.CENTER);
@@ -163,6 +165,7 @@ public class PlayerScreen extends Application {
         return area;
     }
 
+    // Method to create vertical player area around the game
     private VBox createVerticalPlayerArea(String playerName) {
         VBox area = new VBox(3);
         area.setAlignment(Pos.CENTER);
@@ -181,6 +184,7 @@ public class PlayerScreen extends Application {
         return area;
     }
 
+    // Method to create image view
     private ImageView createImageView(Card card) {
         ImageView view = new ImageView(CardLoader.loadCardImage(card.getPossibleImageNames()[0]));
         view.setFitWidth(50);
@@ -190,6 +194,7 @@ public class PlayerScreen extends Application {
         return view;
     }
 
+    // Method to create compact card view
     private ImageView createCompactCardView(Card card) {
         ImageView view = new ImageView(CardLoader.loadCardImage(card.getPossibleImageNames()[0]));
         view.setFitWidth(40);
@@ -199,6 +204,7 @@ public class PlayerScreen extends Application {
         return view;
     }
 
+    // Method to load the hidden draw pile card
     private ImageView createHiddenDrawPileImage() {
         ImageView view = new ImageView(CardLoader.loadCardImage("uno_0_card.png"));
         view.setFitWidth(50);
@@ -208,6 +214,7 @@ public class PlayerScreen extends Application {
         return view;
     }
 
+    // Method to handle draw card
     private void handleDrawCard() {
         Card drawnCard = gameLogic.drawFromDeck(gameLogic.getCurrentPlayer());
         if (drawnCard != null) {
@@ -219,6 +226,7 @@ public class PlayerScreen extends Application {
         refreshUI();
     }
 
+    // Method to handle card click
     private void handleCardClick(Card card) {
         if (gameLogic.isValidMove(card, gameLogic.getTopCard())) {
             discardPileTop = card;
@@ -237,6 +245,7 @@ public class PlayerScreen extends Application {
         }
     }
 
+    // Method to show the color section of the game
     private void showColorSelection() {
         Stage colorStage = new Stage();
         VBox box = new VBox(8);
@@ -270,6 +279,7 @@ public class PlayerScreen extends Application {
         colorStage.show();
     }
 
+    // This method represents the pause button of the game
     private void showPauseMenu(Stage mainStage) {
         Stage pauseStage = new Stage();
         VBox menu = new VBox(10);
@@ -295,6 +305,7 @@ public class PlayerScreen extends Application {
         pauseStage.show();
     }
 
+    // Method to update the turns
     private void updateTurn() {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(e -> {
@@ -310,6 +321,7 @@ public class PlayerScreen extends Application {
         delay.play();
     }
 
+    // Playing with AI
     private void playAI() {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(e -> {
@@ -326,6 +338,7 @@ public class PlayerScreen extends Application {
         delay.play();
     }
 
+    // Method to refresh UI
     private void refreshUI() {
         discardPileView.setImage(CardLoader.loadCardImage(discardPileTop.getPossibleImageNames()[0]));
         root.setRight(createVerticalPlayerArea("Player 3"));
@@ -334,12 +347,14 @@ public class PlayerScreen extends Application {
         root.setTop(createHorizontalPlayerArea("Player 2"));
     }
 
+    // Updates the game log
     private void updateGameLog(String message) {
         lastMoveIndicator.setText("Last: " + message.split("\n")[0]);
         debugText.appendText(message + "\n");
         debugText.setScrollTop(Double.MAX_VALUE);
     }
 
+    // Method to shows alert
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
@@ -348,6 +363,7 @@ public class PlayerScreen extends Application {
         alert.showAndWait();
     }
 
+    // Method to return to main menu
     private void returnToMainMenu(Stage currentStage) {
         try {
             currentStage.close();
@@ -357,6 +373,7 @@ public class PlayerScreen extends Application {
         }
     }
 
+    // Main method
     public static void main(String[] args) {
         launch(args);
     }
